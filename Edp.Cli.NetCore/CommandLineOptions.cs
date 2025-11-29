@@ -8,5 +8,5 @@ public class CommandLineOptions
     public bool GenerateSchema { get; set; }
 
     [Option('d', "directory", Required = false, HelpText = @"JSON Schemas directory path")]
-    public string Directory { get; set; }
+    public string? Directory { get; set; }
 }

@@ -25,10 +25,13 @@ public static class ContainerConfiguration
 
     public static void ConfigureServices(IServiceCollection services, IConfigurationRoot configurationRoot)
     {
-        var applicationSettings = configurationRoot.GetSection(Defaults.ConfigurationSectionName).Get<ApplicationSettings>();
+        var applicationSettings = configurationRoot
+            .GetRequiredSection(Defaults.ConfigurationSectionName)
+            .Get<ApplicationSettings>() ?? throw new InvalidOperationException("Cannot load application settings from configuration.");
+
         services
-            .AddSingleton<IConfigurationRoot>(configurationRoot)
-            .AddSingleton<ApplicationSettings>(applicationSettings)
+            .AddSingleton(configurationRoot)
+            .AddSingleton(applicationSettings)
             .AddScoped<ILoggerFactory>(c => CreateLoggerFactory(applicationSettings))
             .AddScoped<JSchemaGenerator>()
             .AddScoped<IPluginManager, PluginManager>()
