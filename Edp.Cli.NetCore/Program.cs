@@ -20,9 +20,11 @@ internal static class Program
     private const int Success = 0;
     private const int ErrorBadArguments = 160;
 
+    private static readonly CancellationTokenSource CancelTokenSource = new();
+
     private static IConfigurationRoot GetConfigurationRoot()
     {
-        var currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        var currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? Directory.GetCurrentDirectory();
         var configurationBuilder = new ConfigurationBuilder()
             .SetBasePath(currentDirectory)
             .AddJsonFile(Defaults.ConfigurationFileName);
@@ -42,14 +44,15 @@ internal static class Program
     {
         var configurationRoot = GetConfigurationRoot();
         var serviceProvider = CreateServiceProvider(configurationRoot);
-        var applicationSettings = configurationRoot.GetSection(Defaults.ConfigurationSectionName).Get<ApplicationSettings>();
-        var dataPipelineService = serviceProvider.GetService<DataPipelineService>();
+        var applicationSettings = configurationRoot
+            .GetRequiredSection(Defaults.ConfigurationSectionName)
+            .Get<ApplicationSettings>() ?? throw new InvalidOperationException("Cannot load application settings from configuration.");
+        var dataPipelineService = serviceProvider.GetRequiredService<DataPipelineService>();
 
-        var cancelTokenSource = new CancellationTokenSource();
-        var cancellationToken = cancelTokenSource.Token;
-        Console.CancelKeyPress += (s, a) =>
+        var cancellationToken = CancelTokenSource.Token;
+        Console.CancelKeyPress += (_, a) =>
         {
-            cancelTokenSource.Cancel();
+            CancelTokenSource.Cancel();
             a.Cancel = true;
         };
 
@@ -58,7 +61,7 @@ internal static class Program
             string jsonSchemasDirectory;
             if (string.IsNullOrWhiteSpace(commandLineOptions.Directory))
             {
-                jsonSchemasDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+                jsonSchemasDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? Directory.GetCurrentDirectory();
             }
             else
             {
@@ -82,7 +85,7 @@ internal static class Program
 
     private static async Task<int> Main(string[] args)
     {
-        var parser = new Parser(settings =>
+        using var parser = new Parser(settings =>
         {
             settings.CaseSensitive = true;
             settings.IgnoreUnknownArguments = false;
