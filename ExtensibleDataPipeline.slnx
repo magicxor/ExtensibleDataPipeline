@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="Emb.Cli.NetCore/Emb.Cli.NetCore.csproj" />
+  <Project Path="Emb.Common/Emb.Common.csproj" />
+  <Project Path="Emb.Configurator/Emb.Configurator.csproj" />
+  <Project Path="Emb.Core/Emb.Core.csproj" />
+  <Project Path="Emb.DataSourceProvider.DvachPost/Emb.DataSourceProvider.DvachPost.csproj" />
+  <Project Path="Emb.DataSourceProvider.DvachThread/Emb.DataSourceProvider.DvachThread.csproj" />
+  <Project Path="Emb.DataSourceProvider.TelegramChannel/Emb.DataSourceProvider.TelegramChannel.csproj" />
+  <Project Path="Emb.DataSourceProvider.VkFeed/Emb.DataSourceProvider.VkFeed.csproj" />
+  <Project Path="Emb.RegExprTests/Emb.RegExprTests.csproj" />
+  <Project Path="Emb.TargetProvider.File/Emb.TargetProvider.File.csproj" />
+  <Project Path="Emb.TargetProvider.Telegram/Emb.TargetProvider.Telegram.csproj" />
+</Solution>

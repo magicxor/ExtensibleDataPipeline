@@ -14,7 +14,7 @@ using Newtonsoft.Json.Schema.Generation;
 
 namespace Emb.Core.Services
 {
-    public class MessageBrokerService
+    public class DataPipelineService
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly IConfigurationRoot _configurationRoot;
@@ -24,14 +24,14 @@ namespace Emb.Core.Services
         private readonly JSchemaGenerator _schemaGenerator;
         private const int DefaultTimeoutInSeconds = 900;
 
-        public MessageBrokerService(ILoggerFactory loggerFactory, 
+        public DataPipelineService(ILoggerFactory loggerFactory,
             IConfigurationRoot configurationRoot,
             ApplicationSettings applicationSettings,
             IPluginManager pluginManager, 
             JSchemaGenerator schemaGenerator)
         {
             _loggerFactory = loggerFactory;
-            _logger = loggerFactory.CreateLogger<MessageBrokerService>();
+            _logger = loggerFactory.CreateLogger<DataPipelineService>();
             _configurationRoot = configurationRoot;
             _applicationSettings = applicationSettings;
             _pluginSet = pluginManager.LoadPlugins();
