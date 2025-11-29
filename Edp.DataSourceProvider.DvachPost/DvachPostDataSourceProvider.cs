@@ -1,0 +1,67 @@
+﻿using System;
+using System.Composition;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Edp.DataSourceProvider.DvachPost.Abstractions;
+using Edp.DataSourceProvider.DvachPost.Models;
+using Edp.DataSourceProvider.DvachPost.Services;
+using Edp.Common.Abstractions;
+using Edp.Common.Models;
+using Edp.Common.Utils;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Refit;
+
+namespace Edp.DataSourceProvider.DvachPost
+{
+    [Export(typeof(IDataSourceProvider))]
+    public class DvachPostDataSourceProvider : IDataSourceProvider
+    {
+        public async Task<IDataFetchResult> GetNewItemsAsPlainTextAsync(ILoggerFactory loggerFactory, 
+            IConfigurationRoot configurationRoot, 
+            string endpointOptionsString, 
+            string stateString,
+            CancellationToken cancellationToken)
+        {
+            var providerSettings = configurationRoot.GetSection(GetType().Name).Get<ProviderSettings>();
+            var endpointOptions = JsonConvert.DeserializeObject<EndpointOptions>(endpointOptionsString);
+            var state = JsonConvert.DeserializeObject<State>(stateString) ?? new State();
+            var dataExtractor = new DataExtractor(loggerFactory);
+            var renderer = new Renderer();
+
+            var siteUri = new Uri("https://" + providerSettings.Hostname);
+            var api = RestService.For<IDvachApi>(siteUri.ToString(), new RefitSettings {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(),
+            });
+            
+            var extractedItems = await dataExtractor.ExtractAsync(api, state, endpointOptions, cancellationToken);
+            var filteredItems = dataExtractor.Filter(extractedItems, state, endpointOptions);
+            var renderedItems = renderer.RenderAsPlainText(filteredItems, siteUri, endpointOptions);
+
+            var lastItem = extractedItems.LastOrDefault();
+            if (lastItem != null)
+            {
+                state.LastRecordCreatedUtc = DateTimeUtils.TimestampToUtcDateTime(lastItem.Timestamp);
+            }
+
+            var result = new DataFetchResult()
+            {
+                Items = renderedItems,
+                State = JsonConvert.SerializeObject(state),
+            };
+            return result;
+        }
+
+        public Type GetEndpointOptionsType()
+        {
+            return typeof(EndpointOptions);
+        }
+
+        public Type GetProviderSettingsType()
+        {
+            return typeof(ProviderSettings);
+        }
+    }
+}

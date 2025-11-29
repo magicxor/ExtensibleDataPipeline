@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Newtonsoft.Json.Schema" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Edp.Core\Edp.Core.csproj" />
+    <ProjectReference Include="..\Edp.DataSourceProvider.DvachPost\Edp.DataSourceProvider.DvachPost.csproj" />
+    <ProjectReference Include="..\Edp.DataSourceProvider.DvachThread\Edp.DataSourceProvider.DvachThread.csproj" />
+    <ProjectReference Include="..\Edp.DataSourceProvider.TelegramChannel\Edp.DataSourceProvider.TelegramChannel.csproj" />
+    <ProjectReference Include="..\Edp.DataSourceProvider.VkFeed\Edp.DataSourceProvider.VkFeed.csproj" />
+    <ProjectReference Include="..\Edp.TargetProvider.File\Edp.TargetProvider.File.csproj" />
+    <ProjectReference Include="..\Edp.TargetProvider.Telegram\Edp.TargetProvider.Telegram.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json.example">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

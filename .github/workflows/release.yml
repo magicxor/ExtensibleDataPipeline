@@ -9,11 +9,11 @@ on:
 name: release
 
 env:
-  PROJECT_DIR: ./Emb.Cli.NetCore
-  PROJECT_PATH: ./Emb.Cli.NetCore/Emb.Cli.NetCore.csproj
+  PROJECT_DIR: ./Edp.Cli.NetCore
+  PROJECT_PATH: ./Edp.Cli.NetCore/Edp.Cli.NetCore.csproj
   FRAMEWORK: net10.0
   SELF_CONTAINED: true
-  FILE_PREFIX: ExtensibleMessageBroker_
+  FILE_PREFIX: ExtensibleDataPipeline_
 
 jobs:
   build:
@@ -31,12 +31,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Install .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
 
@@ -79,7 +79,7 @@ jobs:
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.build_package.outputs.ZIP_NAME }}
           path: ${{ env.PROJECT_DIR }}/${{ steps.build_package.outputs.ZIP_NAME }}
@@ -90,7 +90,7 @@ jobs:
     needs: build
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           path: ./artifacts
 

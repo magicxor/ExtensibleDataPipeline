@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" />
+    <PackageReference Include="HttpToSocks5Proxy" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="System.Collections" />
+    <PackageReference Include="System.Diagnostics.Debug" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" />
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="System.Net.Primitives" />
+    <PackageReference Include="System.Reflection.Primitives" />
+    <PackageReference Include="System.Runtime.Handles" />
+    <PackageReference Include="System.Security.Cryptography.Primitives" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
+    <PackageReference Include="System.Text.Encoding.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Edp.Common\Edp.Common.csproj" />
+  </ItemGroup>
+
+</Project>
