@@ -1,13 +1,13 @@
 <Solution>
-  <Project Path="Emb.Cli.NetCore/Emb.Cli.NetCore.csproj" />
-  <Project Path="Emb.Common/Emb.Common.csproj" />
-  <Project Path="Emb.Configurator/Emb.Configurator.csproj" />
-  <Project Path="Emb.Core/Emb.Core.csproj" />
-  <Project Path="Emb.DataSourceProvider.DvachPost/Emb.DataSourceProvider.DvachPost.csproj" />
-  <Project Path="Emb.DataSourceProvider.DvachThread/Emb.DataSourceProvider.DvachThread.csproj" />
-  <Project Path="Emb.DataSourceProvider.TelegramChannel/Emb.DataSourceProvider.TelegramChannel.csproj" />
-  <Project Path="Emb.DataSourceProvider.VkFeed/Emb.DataSourceProvider.VkFeed.csproj" />
-  <Project Path="Emb.RegExprTests/Emb.RegExprTests.csproj" />
-  <Project Path="Emb.TargetProvider.File/Emb.TargetProvider.File.csproj" />
-  <Project Path="Emb.TargetProvider.Telegram/Emb.TargetProvider.Telegram.csproj" />
+  <Project Path="Edp.Cli.NetCore/Edp.Cli.NetCore.csproj" />
+  <Project Path="Edp.Common/Edp.Common.csproj" />
+  <Project Path="Edp.Configurator/Edp.Configurator.csproj" />
+  <Project Path="Edp.Core/Edp.Core.csproj" />
+  <Project Path="Edp.DataSourceProvider.DvachPost/Edp.DataSourceProvider.DvachPost.csproj" />
+  <Project Path="Edp.DataSourceProvider.DvachThread/Edp.DataSourceProvider.DvachThread.csproj" />
+  <Project Path="Edp.DataSourceProvider.TelegramChannel/Edp.DataSourceProvider.TelegramChannel.csproj" />
+  <Project Path="Edp.DataSourceProvider.VkFeed/Edp.DataSourceProvider.VkFeed.csproj" />
+  <Project Path="Edp.RegExprTests/Edp.RegExprTests.csproj" />
+  <Project Path="Edp.TargetProvider.File/Edp.TargetProvider.File.csproj" />
+  <Project Path="Edp.TargetProvider.Telegram/Edp.TargetProvider.Telegram.csproj" />
 </Solution>

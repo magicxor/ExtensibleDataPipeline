@@ -1,0 +1,16 @@
+﻿using CommunityToolkit.Mvvm.Input;
+using Edp.Configurator.Interfaces;
+using PropertyChanged;
+
+namespace Edp.Configurator.ViewModel
+{
+    [AddINotifyPropertyChangedInterface]
+    public class DialogViewModel
+    {
+        public string Title { get; set; }
+        public string MessageText { get; set; }
+        public string ButtonText { get; set; }
+
+        public RelayCommand<IClosable> CloseCommand { get; } = new RelayCommand<IClosable>(closable => closable.Close());
+    }
+}

@@ -1,0 +1,16 @@
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Edp.DataSourceProvider.VkFeed.Dto;
+using Refit;
+
+namespace Edp.DataSourceProvider.VkFeed.Abstractions
+{
+    public interface IVkApi
+    {
+        [Get("/method/newsfeed.get?return_banned=0&count=100&filters=post&access_token={accessToken}&v=5.131")]
+        Task<VkNewsFeedGetResponse> GetFeedFirstPage(string accessToken, CancellationToken cancellationToken);
+
+        [Get("/method/newsfeed.get?return_banned=0&count=100&filters=post&start_from={startFrom}&access_token={accessToken}&v=5.131")]
+        Task<VkNewsFeedGetResponse> GetFeedNextPage(string accessToken, string startFrom, CancellationToken cancellationToken);
+    }
+}
