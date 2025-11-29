@@ -56,7 +56,7 @@ The project uses [System.Composition](https://www.nuget.org/packages/System.Comp
    dotnet build
    ```
 
-3. Configure `appsettings.json` (see [Configuration](#%EF%B8%8F-configuration) section)
+3. Configure `appsettings.json`
 
 4. Run the CLI:
    ```bash
