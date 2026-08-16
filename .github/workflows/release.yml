@@ -107,7 +107,7 @@ jobs:
           fi
 
       - name: Publish Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           prerelease: ${{ steps.ref_info.outputs.IS_PRERELEASE }}
